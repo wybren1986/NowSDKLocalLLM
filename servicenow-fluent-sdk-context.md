@@ -24,15 +24,22 @@ export const myItem = CatalogItem({ ... })
 ```
 my-app/
   src/
-    catalog-items/
-      laptop-request.now.ts
-    flows/
-      laptop-fulfillment.now.ts
-    modules/
+    fluent/                          # All .now.ts files live here — required
+      index.now.ts                   # Main entry point
+      catalog-items/
+        laptop-request.now.ts
+      flows/
+        laptop-fulfillment.now.ts
+      tsconfig.json
+    server/                          # Server-side JS/TS scripts
       scripts/
         pre-insert.js
-  now.config.json
+      tsconfig.json
+  now.config.json                    # App metadata: scope, scopeId, name
+  package.json
 ```
+
+**The `src/fluent/` directory is required** — the SDK only picks up `.now.ts` files from there. Organize by artifact type using kebab-case folder names. Server-side scripts live in `src/server/` and are imported into fluent files.
 
 `Now.ID['some_name']` generates a stable unique identifier for each artifact. Use `snake_case` for IDs.
 
